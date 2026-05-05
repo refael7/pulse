@@ -48,6 +48,19 @@ export async function softDeleteTask(id: string) {
   });
 }
 
+export type UpdateTaskInput = {
+  title?: string;
+  description?: string;
+  priority?: Priority;
+};
+
+export async function updateTask(id: string, data: UpdateTaskInput) {
+  return prisma.task.update({
+    where: { id },
+    data,
+  });
+}
+
 export async function getDeletedTasks() {
   return prisma.task.findMany({
     where: { isDeleted: true },

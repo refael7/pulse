@@ -2,7 +2,7 @@
 import { prisma } from "@/lib/prisma";
 import { z } from "zod";
 import { revalidatePath } from "next/cache";
-import { createTask, updateTaskStatus, softDeleteTask } from "@/lib/dal/tasks";
+import { createTask, updateTaskStatus, softDeleteTask, updateTask } from "@/lib/dal/tasks";
 import { logActivity } from "@/lib/dal/audit";
 import { getAllUsers } from "@/lib/dal/users";
 
@@ -59,6 +59,45 @@ export async function createTaskAction(
   revalidatePath("/");
 
   return { success: true, message: "המשימה נוצרה בהצלחה!" };
+}
+
+export async function updateTaskAction(
+  id: string,
+  prevState: FormState,
+  formData: FormData
+): Promise<FormState> {
+  await new Promise((r) => setTimeout(r, 500));
+
+  const raw = {
+    title: formData.get("title") as string,
+    description: formData.get("description") as string,
+    priority: formData.get("priority") as string,
+  };
+
+  const result = CreateTaskSchema.safeParse(raw);
+
+  if (!result.success) {
+    return {
+      success: false,
+      message: "יש שגיאות בטופס",
+      errors: result.error.flatten().fieldErrors,
+    };
+  }
+
+  const users = await getAllUsers();
+  const firstUser = users[0];
+
+  await updateTask(id, {
+    title: result.data.title,
+    description: result.data.description,
+    priority: result.data.priority as "LOW" | "MEDIUM" | "HIGH",
+  });
+
+  await logActivity(firstUser.id, id, "משימה עודכנה", `כותרת: ${result.data.title}`);
+
+  revalidatePath("/");
+
+  return { success: true, message: "המשימה עודכנה בהצלחה!" };
 }
 
 export async function updateTaskStatusAction(

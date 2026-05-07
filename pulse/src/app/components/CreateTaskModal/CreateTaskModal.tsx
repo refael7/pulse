@@ -18,9 +18,29 @@ export default function CreateTaskModal() {
       </button>
 
       {isOpen && (
-        <div className={styles.overlay}>
-          <div className={styles.modal} dir="rtl">
-            <h2 className={styles.title}>{newTaskModalTitle}</h2>
+        <div className={styles.overlay} onClick={() => setIsOpen(false)}>
+          <div
+            className={styles.modal}
+            dir="rtl"
+            onClick={(event) => event.stopPropagation()}
+          >
+            <div className={styles.header}>
+              <div>
+                <h2 className={styles.title}>{newTaskModalTitle}</h2>
+                <p className={styles.subtitle}>
+                  הזן את הפרטים וקבע את העדיפות כדי שהמשימה תיערך כחלק מהיומן.
+                </p>
+              </div>
+              <button
+                type="button"
+                aria-label="Close modal"
+                className={styles.closeButton}
+                onClick={() => setIsOpen(false)}
+              >
+                ✕
+              </button>
+            </div>
+
             <CreateTaskForm onClose={() => setIsOpen(false)} />
           </div>
         </div>

@@ -1,0 +1,92 @@
+.page {
+  min-height: 100vh;
+  background-color: #f9fafb;
+  padding: 32px;
+}
+
+.container {
+  max-width: 896px;
+  margin: 0 auto;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 32px;
+}
+
+.titleSkeleton,
+.subtitleSkeleton,
+.buttonSkeleton,
+.skeletonBar {
+  background-color: #e5e7eb;
+  border-radius: 12px;
+  animation: pulse 1.5s ease-in-out infinite;
+}
+
+.titleSkeleton {
+  width: 240px;
+  height: 28px;
+  margin-bottom: 8px;
+}
+
+.subtitleSkeleton {
+  width: 180px;
+  height: 16px;
+}
+
+.actions {
+  display: flex;
+  gap: 12px;
+}
+
+.buttonSkeleton {
+  height: 40px;
+  min-width: 96px;
+}
+
+.back {
+  width: 120px;
+}
+
+.tableWrapper {
+  background-color: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px -1px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.tableHead {
+  background-color: #f9fafb;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.headerCell,
+.bodyCell {
+  padding: 16px;
+  text-align: right;
+}
+
+.row {
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.skeletonBar {
+  height: 14px;
+  width: 100%;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.4;
+  }
+}

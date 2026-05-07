@@ -1,16 +1,26 @@
 import Link from "next/link";
+import styles from "./not-found.module.scss";
 import { backToDashboardLabel, notFoundDescription, notFoundTitle } from "@/lib/messages";
 
 export default function NotFound() {
   return (
-    <main className="min-h-screen bg-gray-50 flex items-center justify-center" dir="rtl">
-      <div className="bg-white rounded-xl p-8 shadow text-center max-w-md">
-        <p className="text-5xl mb-4">🔍</p>
-        <h2 className="text-xl font-bold text-gray-800 mb-2">{notFoundTitle}</h2>
-        <p className="text-gray-500 text-sm mb-6">{notFoundDescription}</p>
-        <Link href="/" className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 text-sm">
-          {backToDashboardLabel}
-        </Link>
+    <main className={styles.page} dir="rtl">
+      <div className={styles.canvas}>
+        <section className={styles.card}>
+          <div className={styles.symbol}>🔍</div>
+          <h1 className={styles.title}>{notFoundTitle}</h1>
+          <p className={styles.description}>{notFoundDescription}</p>
+
+          <div className={styles.actions}>
+            <Link href="/" className={styles.button}>
+              {backToDashboardLabel}
+            </Link>
+          </div>
+
+          <p className={styles.supportText}>
+            אם הגעת דרך קישור ישן, נסה לרענן את הדף או לחזור לדף הראשי כדי להמשיך.
+          </p>
+        </section>
       </div>
     </main>
   );

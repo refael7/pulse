@@ -1,0 +1,38 @@
+.skeleton {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin-bottom: 32px;
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+.stat {
+  background-color: #ffffff;
+  border-radius: 8px;
+  padding: 16px;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px -1px rgba(0, 0, 0, 0.1);
+}
+
+.labelSkeleton {
+  height: 12px;
+  background-color: #e5e7eb;
+  border-radius: 4px;
+  width: 66.666667%;
+  margin-bottom: 12px;
+}
+
+.valueSkeleton {
+  height: 32px;
+  background-color: #e5e7eb;
+  border-radius: 4px;
+  width: 33.333333%;
+}

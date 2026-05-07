@@ -1,0 +1,80 @@
+.loadingPage {
+  min-height: 100vh;
+  background-color: #f9fafb;
+  padding: 32px;
+}
+
+.container {
+  max-width: 896px;
+  margin: 0 auto;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 32px;
+}
+
+.titleSkeleton {
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  height: 32px;
+  background-color: #e5e7eb;
+  border-radius: 4px;
+  width: 128px;
+  margin-bottom: 4px;
+}
+
+.subtitleSkeleton {
+  height: 12px;
+  background-color: #e5e7eb;
+  border-radius: 4px;
+  width: 192px;
+}
+
+.actions {
+  display: flex;
+  gap: 12px;
+}
+
+.buttonSkeleton {
+  height: 40px;
+  background-color: #e5e7eb;
+  border-radius: 8px;
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+
+  &.audit {
+    width: 112px;
+  }
+
+  &.create {
+    width: 128px;
+  }
+
+  &.logout {
+    width: 80px;
+  }
+}
+
+.tasksGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+
+  @media (min-width: 768px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @media (min-width: 1024px) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}

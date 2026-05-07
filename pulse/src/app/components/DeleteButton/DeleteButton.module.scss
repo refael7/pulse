@@ -1,0 +1,29 @@
+.button {
+  font-size: 12px;
+  line-height: 16px;
+  padding: 4px 8px;
+  border-radius: 9999px;
+  transition: opacity 0.15s ease-in-out;
+
+  &.delete {
+    background-color: #fee2e2;
+    color: #b91c1c;
+
+    &:hover {
+      background-color: #fecaca;
+    }
+  }
+
+  &.restore {
+    background-color: #d1fae5;
+    color: #047857;
+
+    &:hover {
+      background-color: #a7f3d0;
+    }
+  }
+
+  &:disabled {
+    opacity: 0.5;
+  }
+}

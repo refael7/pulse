@@ -1,5 +1,5 @@
-import StatsBarSkeleton from "./components/StatsBarSkeleton";
-import TaskCardSkeleton from "./components/TaskCardSkeleton";
+import StatsBarSkeleton from "./components/StatsBarSkeleton/StatsBarSkeleton";
+import TaskCardSkeleton from "./components/TaskCardSkeleton/TaskCardSkeleton";
 
 export default function Loading() {
   return (

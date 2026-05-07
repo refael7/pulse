@@ -1,0 +1,30 @@
+.button {
+  font-size: 12px;
+  line-height: 16px;
+  padding: 4px 8px;
+  border-radius: 9999px;
+  transition: opacity 0.15s ease-in-out;
+
+  &.todo {
+    background-color: #dbeafe;
+    color: #1d4ed8;
+  }
+
+  &.inProgress {
+    background-color: #fed7aa;
+    color: #c2410c;
+  }
+
+  &.done {
+    background-color: #d1fae5;
+    color: #047857;
+  }
+
+  &:disabled {
+    opacity: 0.6;
+  }
+
+  &:not(:disabled):hover {
+    opacity: 0.8;
+  }
+}

@@ -2,6 +2,8 @@
 
 import { useTransition } from "react";
 import { logoutAction } from "@/app/login/loginAction";
+import styles from "./LogoutButton.module.scss";
+import { logoutLabel, logoutPendingLabel } from "@/lib/messages";
 
 export default function LogoutButton() {
   const [isPending, startTransition] = useTransition();
@@ -16,9 +18,9 @@ export default function LogoutButton() {
     <button
       onClick={handleClick}
       disabled={isPending}
-      className="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600 disabled:opacity-50"
+      className={styles.button}
     >
-      {isPending ? "יוצא..." : "יציאה"}
+      {isPending ? logoutPendingLabel : logoutLabel}
     </button>
   );
 }

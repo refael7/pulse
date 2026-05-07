@@ -5,9 +5,25 @@ import { revalidatePath } from "next/cache";
 import { createTask, updateTaskStatus, softDeleteTask, updateTask } from "@/lib/dal/tasks";
 import { logActivity } from "@/lib/dal/audit";
 import { getAllUsers } from "@/lib/dal/users";
+import {
+  formErrorMessage,
+  titleRequiredError,
+  taskCreatedAction,
+  taskCreatedDetailsPrefix,
+  taskCreatedSuccess,
+  taskUpdatedAction,
+  taskUpdatedDetailsPrefix,
+  taskUpdatedSuccess,
+  statusChangedAction,
+  statusChangedDetailsPrefix,
+  taskDeletedAction,
+  taskDeletedDetails,
+  taskRestoredAction,
+  taskRestoredDetails,
+} from "@/lib/messages";
 
 const CreateTaskSchema = z.object({
-  title: z.string().min(1, "כותרת היא שדה חובה"),
+  title: z.string().min(1, titleRequiredError),
   description: z.string().optional(),
   priority: z.enum(["LOW", "MEDIUM", "HIGH"]),
 });
@@ -39,7 +55,7 @@ export async function createTaskAction(
   if (!result.success) {
     return {
       success: false,
-      message: "יש שגיאות בטופס",
+      message: formErrorMessage,
       errors: result.error.flatten().fieldErrors,
     };
   }
@@ -54,11 +70,11 @@ export async function createTaskAction(
     ownerId: firstUser.id,
   });
 
-  await logActivity(firstUser.id, task.id, "משימה נוצרה", `כותרת: ${task.title}`);
+  await logActivity(firstUser.id, task.id, taskCreatedAction, `${taskCreatedDetailsPrefix}${task.title}`);
 
   revalidatePath("/");
 
-  return { success: true, message: "המשימה נוצרה בהצלחה!" };
+  return { success: true, message: taskCreatedSuccess };
 }
 
 export async function updateTaskAction(
@@ -79,7 +95,7 @@ export async function updateTaskAction(
   if (!result.success) {
     return {
       success: false,
-      message: "יש שגיאות בטופס",
+      message: formErrorMessage,
       errors: result.error.flatten().fieldErrors,
     };
   }
@@ -93,11 +109,11 @@ export async function updateTaskAction(
     priority: result.data.priority as "LOW" | "MEDIUM" | "HIGH",
   });
 
-  await logActivity(firstUser.id, id, "משימה עודכנה", `כותרת: ${result.data.title}`);
+  await logActivity(firstUser.id, id, taskUpdatedAction, `${taskUpdatedDetailsPrefix}${result.data.title}`);
 
   revalidatePath("/");
 
-  return { success: true, message: "המשימה עודכנה בהצלחה!" };
+  return { success: true, message: taskUpdatedSuccess };
 }
 
 export async function updateTaskStatusAction(
@@ -116,8 +132,8 @@ export async function updateTaskStatusAction(
   await logActivity(
     firstUser.id,
     id,
-    "סטטוס שונה",
-    `סטטוס חדש: ${status}`
+    statusChangedAction,
+    `${statusChangedDetailsPrefix}${status}`
   );
 
   revalidatePath("/");
@@ -133,9 +149,8 @@ export async function deleteTaskAction(id: string) {
   await logActivity(
     firstUser.id,
     id,
-    "משימה נמחקה",
-    "נמחק"
-    
+    taskDeletedAction,
+    taskDeletedDetails
   );
 
   revalidatePath("/");
@@ -155,8 +170,8 @@ export async function restoreTaskAction(id: string) {
   await logActivity(
     firstUser.id,
     id,
-    "משימה שוחזרה",
-    "שחזור לאחר מחיקה"
+    taskRestoredAction,
+    taskRestoredDetails
   );
 
   revalidatePath("/");

@@ -2,6 +2,7 @@
 
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
+import { wrongCredentials } from "@/lib/messages";
 
 export async function loginAction(
   prevState: { error: string },
@@ -15,7 +16,7 @@ const password = (formData.get("password") as string).trim();
 
  
   if (username !== validUsername || password !== validPassword) {
-    return { error: "שם משתמש או סיסמה שגויים" };
+    return { error: wrongCredentials };
   }
 
   const cookieStore = await cookies();

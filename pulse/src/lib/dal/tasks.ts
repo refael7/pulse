@@ -1,7 +1,7 @@
 import { prisma } from "@/lib/prisma";
 import { TaskStatus, Priority } from "@/generated/prisma/enums";
 
-export type CreateTaskInput = {
+export interface CreateTaskInput {
   title: string;
   description?: string;
   priority?: Priority;
@@ -48,7 +48,7 @@ export async function softDeleteTask(id: string) {
   });
 }
 
-export type UpdateTaskInput = {
+export interface  UpdateTaskInput {
   title?: string;
   description?: string;
   priority?: Priority;

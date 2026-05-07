@@ -1,0 +1,96 @@
+.page {
+  min-height: 100vh;
+  background-color: #f9fafb;
+  padding: 32px;
+}
+
+.container {
+  max-width: 896px;
+  margin: 0 auto;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 32px;
+}
+
+.title {
+  font-size: 24px;
+  line-height: 32px;
+  font-weight: 700;
+  color: #1f2937;
+}
+
+.subtitle {
+  font-size: 14px;
+  line-height: 20px;
+  color: #6b7280;
+}
+
+.actions {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+.auditLink {
+  background-color: #1d4ed8;
+  color: #ffffff;
+  padding: 8px 16px;
+  border-radius: 8px;
+
+  &:hover {
+    background-color: #3b82f6;
+  }
+}
+
+.empty {
+  text-align: center;
+  padding: 64px 0;
+  color: #9ca3af;
+}
+
+.emptyTitle {
+  font-size: 20px;
+  line-height: 28px;
+}
+
+.emptySubtitle {
+  font-size: 14px;
+  line-height: 20px;
+  margin-top: 8px;
+}
+
+.tasksGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+
+  @media (min-width: 768px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @media (min-width: 1024px) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.deletedTasksGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+}
+
+.deletedSection {
+  margin-top: 32px;
+}
+
+.deletedTitle {
+  font-size: 18px;
+  line-height: 24px;
+  font-weight: 600;
+  color: #9ca3af;
+  margin-bottom: 16px;
+}

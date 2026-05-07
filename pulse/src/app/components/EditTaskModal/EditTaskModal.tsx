@@ -1,7 +1,9 @@
 "use client";
 
 import { useState } from "react";
-import EditTaskForm from "./EditTaskForm";
+import EditTaskForm from "../EditTaskForm/EditTaskForm";
+import styles from "./EditTaskModal.module.scss";
+import { editTaskButtonLabel, editTaskModalTitle } from "@/lib/messages";
 
 type Task = {
   id: string;
@@ -17,16 +19,16 @@ export default function EditTaskModal({ task }: { task: Task }) {
     <>
       <button
         onClick={() => setIsOpen(true)}
-        className="bg-blue-100 hover:bg-blue-200 text-blue-600 px-2 py-1 rounded text-sm transition-colors"
-        title="ערוך משימה"
+        className={styles.editButton}
+        title={editTaskButtonLabel}
       >
-        ✏️עריכה
+        {editTaskButtonLabel}
       </button>
 
       {isOpen && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-          <div className="bg-white rounded-xl p-6 w-full max-w-md mx-4" dir="rtl">
-            <h2 className="text-lg font-bold text-gray-800 mb-4">עריכת משימה</h2>
+        <div className={styles.overlay}>
+          <div className={styles.modal} dir="rtl">
+            <h2 className={styles.title}>{editTaskModalTitle}</h2>
             <EditTaskForm
               taskId={task.id}
               initialTitle={task.title}

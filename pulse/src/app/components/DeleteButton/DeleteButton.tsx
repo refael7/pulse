@@ -2,6 +2,8 @@
 
 import { useTransition } from "react";
 import { deleteTaskAction, restoreTaskAction } from "@/app/actions/taskActions";
+import styles from "./DeleteButton.module.scss";
+import { deleteButtonLabel, restoreButtonLabel, pendingDots } from "@/lib/messages";
 
 export default function DeleteButton({
   taskId,
@@ -26,13 +28,9 @@ export default function DeleteButton({
     <button
       onClick={handleClick}
       disabled={isPending}
-      className={`text-xs px-2 py-1 rounded-full transition-opacity ${
-        isDeleted
-          ? "bg-green-100 text-green-700 hover:bg-green-200"
-          : "bg-red-100 text-red-700 hover:bg-red-200"
-      } ${isPending ? "opacity-50" : ""}`}
+      className={`${styles.button} ${isDeleted ? styles.restore : styles.delete}`}
     >
-      {isPending ? "..." : isDeleted ? "שחזר" : "מחק"}
+      {isPending ? pendingDots : isDeleted ? restoreButtonLabel : deleteButtonLabel}
     </button>
   );
 }

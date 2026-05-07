@@ -1,9 +1,10 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import { appMetadataDescription, appMetadataTitle } from "@/lib/messages";
 
 export const metadata: Metadata = {
-  title: "Pulse – מערכת ניהול משימות",
-  description: "מערכת ניהול ומעקב משימות",
+  title: appMetadataTitle,
+  description: appMetadataDescription,
 };
 
 export default function RootLayout({

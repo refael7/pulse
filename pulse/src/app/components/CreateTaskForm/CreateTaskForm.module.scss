@@ -1,0 +1,105 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 13px;
+}
+
+.label {
+  display: block;
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 500;
+  color: #374151;
+  margin-bottom: 4px;
+}
+
+.required {
+  color: #ef4444;
+}
+
+.input,
+.textarea,
+.select {
+  width: 100%;
+  border: 1px solid #0c0c0c;
+  border-radius: 8px;
+  padding: 8px 12px;
+  font-size: 14px;
+  line-height: 20px;
+  color: #000000;
+  transition: border-color 0.2s ease;
+
+  &:focus {
+    outline: none;
+    border-color: #2563eb;
+  }
+
+  &::placeholder {
+    color: #9ca3af;
+  }
+}
+
+.textarea {
+  resize: vertical;
+}
+
+.error {
+  color: #ef4444;
+  font-size: 12px;
+  line-height: 16px;
+  margin-top: 4px;
+}
+
+.message {
+  color: #ef4444;
+  font-size: 14px;
+  line-height: 20px;
+}
+
+.buttonGroup {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.cancelButton {
+  background-color: #dc2626;
+  color: #ffffff;
+  padding: 8px 16px;
+  border: none;
+  border-radius: 8px;
+  font-size: 14px;
+  line-height: 20px;
+  cursor: pointer;
+  transition: background-color 0.2s ease, opacity 0.2s ease;
+
+  &:hover {
+    background-color: #b91c1c;
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+}
+
+.submitButton {
+  background-color: #2563eb;
+  color: #ffffff;
+  padding: 8px 16px;
+  border: none;
+  border-radius: 8px;
+  font-size: 14px;
+  line-height: 20px;
+  cursor: pointer;
+  transition: background-color 0.2s ease, opacity 0.2s ease;
+
+  &:hover {
+    background-color: #1d4ed8;
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+}

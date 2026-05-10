@@ -1,8 +1,8 @@
+export const dynamic = "force-dynamic";
+
 import Link from "next/link";
 import { getAuditLogs } from "@/lib/dal/audit";
 import styles from "./page.module.scss";
-// קכערערער
-export const dynamic = "force-dynamic";
 import {
   auditLogLabel,
   backToDashboardLabel,

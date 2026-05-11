@@ -1,3 +1,11 @@
+$color-delete-bg: #fee2e2;
+$color-delete-bg-hover: #fecaca;
+$color-delete-text: #b91c1c;
+
+$color-restore-bg: #d1fae5;
+$color-restore-bg-hover: #a7f3d0;
+$color-restore-text: #047857;
+
 .button {
   font-size: 12px;
   line-height: 16px;
@@ -6,24 +14,18 @@
   transition: opacity 0.15s ease-in-out;
 
   &.delete {
-    background-color: #fee2e2;
-    color: #b91c1c;
+    background-color: $color-delete-bg;
+    color: $color-delete-text;
 
-    &:hover {
-      background-color: #fecaca;
-    }
+    &:hover { background-color: $color-delete-bg-hover; }
   }
 
   &.restore {
-    background-color: #d1fae5;
-    color: #047857;
+    background-color: $color-restore-bg;
+    color: $color-restore-text;
 
-    &:hover {
-      background-color: #a7f3d0;
-    }
+    &:hover { background-color: $color-restore-bg-hover; }
   }
 
-  &:disabled {
-    opacity: 0.5;
-  }
+  &:disabled { opacity: 0.5; }
 }

@@ -1,3 +1,23 @@
+// ─── Design Tokens ───────────────────────────────────────────
+$color-skeleton: #e5e7eb;
+$color-border:   #e5e7eb;
+$shadow-card:    0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px -1px rgba(0, 0, 0, 0.1);
+$animation-pulse: pulse 1.5s ease-in-out infinite;
+
+// ─── Keyframes ───────────────────────────────────────────────
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.4; }
+}
+
+// ─── Placeholders ────────────────────────────────────────────
+%skeleton-block {
+  background-color: $color-skeleton;
+  border-radius: 12px;
+  animation: $animation-pulse;
+}
+
+// ─── Styles ──────────────────────────────────────────────────
 .page {
   min-height: 100vh;
   background-color: #f9fafb;
@@ -16,22 +36,15 @@
   margin-bottom: 32px;
 }
 
-.titleSkeleton,
-.subtitleSkeleton,
-.buttonSkeleton,
-.skeletonBar {
-  background-color: #e5e7eb;
-  border-radius: 12px;
-  animation: pulse 1.5s ease-in-out infinite;
-}
-
 .titleSkeleton {
+  @extend %skeleton-block;
   width: 240px;
   height: 28px;
   margin-bottom: 8px;
 }
 
 .subtitleSkeleton {
+  @extend %skeleton-block;
   width: 180px;
   height: 16px;
 }
@@ -42,18 +55,17 @@
 }
 
 .buttonSkeleton {
+  @extend %skeleton-block;
   height: 40px;
   min-width: 96px;
-}
 
-.back {
-  width: 120px;
+  &.back { width: 120px; }
 }
 
 .tableWrapper {
   background-color: #ffffff;
   border-radius: 12px;
-  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px -1px rgba(0, 0, 0, 0.1);
+  box-shadow: $shadow-card;
   overflow: hidden;
 }
 
@@ -64,7 +76,7 @@
 
 .tableHead {
   background-color: #f9fafb;
-  border-bottom: 1px solid #e5e7eb;
+  border-bottom: 1px solid $color-border;
 }
 
 .headerCell,
@@ -74,19 +86,11 @@
 }
 
 .row {
-  border-bottom: 1px solid #e5e7eb;
+  border-bottom: 1px solid $color-border;
 }
 
 .skeletonBar {
+  @extend %skeleton-block;
   height: 14px;
   width: 100%;
-}
-
-@keyframes pulse {
-  0%, 100% {
-    opacity: 1;
-  }
-  50% {
-    opacity: 0.4;
-  }
 }

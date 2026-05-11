@@ -1,3 +1,24 @@
+// ─── Design Tokens ───────────────────────────────────────────
+$color-border: #d1d5db;
+$color-text-label: #374151;
+$color-text-placeholder: #9ca3af;
+$color-error: #ef4444;
+$color-focus: #3b82f6;
+
+// ─── Mixins ──────────────────────────────────────────────────
+@mixin base-button($bg, $bg-hover) {
+  background-color: $bg;
+  color: #ffffff;
+  padding: 8px 16px;
+  border-radius: 8px;
+  font-size: 14px;
+  line-height: 20px;
+
+  &:hover    { background-color: $bg-hover; }
+  &:disabled { opacity: 0.5; }
+}
+
+// ─── Styles ──────────────────────────────────────────────────
 .form {
   display: flex;
   flex-direction: column;
@@ -9,13 +30,13 @@
   font-size: 14px;
   line-height: 20px;
   font-weight: 500;
-  color: #374151;
+  color: $color-text-label;
   margin-bottom: 4px;
 }
 
 .input, .textarea, .select {
   width: 100%;
-  border: 1px solid #d1d5db;
+  border: 1px solid $color-border;
   border-radius: 8px;
   padding: 8px 12px;
   font-size: 14px;
@@ -24,27 +45,23 @@
 
   &:focus {
     outline: none;
-    box-shadow: 0 0 0 2px #3b82f6;
+    box-shadow: 0 0 0 2px $color-focus;
   }
 
-  &::placeholder {
-    color: #9ca3af;
-  }
+  &::placeholder { color: $color-text-placeholder; }
 }
 
-.textarea {
-  resize: vertical;
-}
+.textarea { resize: vertical; }
 
 .error {
-  color: #ef4444;
+  color: $color-error;
   font-size: 12px;
   line-height: 16px;
   margin-top: 4px;
 }
 
 .message {
-  color: #ef4444;
+  color: $color-error;
   font-size: 14px;
   line-height: 20px;
 }
@@ -55,36 +72,5 @@
   justify-content: space-between;
 }
 
-.cancelButton {
-  background-color: #dc2626;
-  color: #ffffff;
-  padding: 8px 16px;
-  border-radius: 8px;
-  font-size: 14px;
-  line-height: 20px;
-
-  &:hover {
-    background-color: #b91c1c;
-  }
-
-  &:disabled {
-    opacity: 0.5;
-  }
-}
-
-.submitButton {
-  background-color: #2563eb;
-  color: #ffffff;
-  padding: 8px 16px;
-  border-radius: 8px;
-  font-size: 14px;
-  line-height: 20px;
-
-  &:hover {
-    background-color: #1d4ed8;
-  }
-
-  &:disabled {
-    opacity: 0.5;
-  }
-}
+.cancelButton { @include base-button(#dc2626, #b91c1c); }
+.submitButton  { @include base-button(#2563eb, #1d4ed8); }

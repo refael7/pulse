@@ -1,3 +1,10 @@
+$color-primary:      #2563eb;
+$color-primary-dark: #1d4ed8;
+$color-border:       #d1d5db;
+$color-text-label:   #374151;
+$color-error:        #ef4444;
+$color-focus:        #3b82f6;
+
 .form {
   display: flex;
   flex-direction: column;
@@ -10,13 +17,13 @@
   font-size: 14px;
   line-height: 20px;
   font-weight: 500;
-  color: #374151;
+  color: $color-text-label;
   margin-bottom: 4px;
 }
 
 .input {
   width: 100%;
-  border: 1px solid #d1d5db;
+  border: 1px solid $color-border;
   border-radius: 8px;
   padding: 8px 12px;
   font-size: 14px;
@@ -25,27 +32,22 @@
 
   &:focus {
     outline: none;
-    box-shadow: 0 0 0 2px #3b82f6;
+    box-shadow: 0 0 0 2px $color-focus;
   }
 }
 
 .error {
-  color: #ef4444;
+  color: $color-error;
   font-size: 14px;
   line-height: 20px;
 }
 
 .button {
-  background-color: #2563eb;
+  background-color: $color-primary;
   color: #ffffff;
   padding: 8px 16px;
   border-radius: 8px;
 
-  &:hover {
-    background-color: #1d4ed8;
-  }
-
-  &:disabled {
-    opacity: 0.5;
-  }
+  &:hover    { background-color: $color-primary-dark; }
+  &:disabled { opacity: 0.5; }
 }

@@ -1,23 +1,27 @@
+// ─── Design Tokens ───────────────────────────────────────────
+$color-edit-bg:       #dbeafe;
+$color-edit-bg-hover: #bfdbfe;
+$color-edit-text:     #2563eb;
+$color-text-dark:     #1f2937;
+
+$transition-base: 0.15s ease-in-out;
+
+// ─── Styles ──────────────────────────────────────────────────
 .editButton {
-  background-color: #dbeafe;
-  color: #2563eb;
+  background-color: $color-edit-bg;
+  color: $color-edit-text;
   padding: 4px 8px;
   border-radius: 4px;
   font-size: 14px;
   line-height: 20px;
-  transition: background-color 0.15s ease-in-out;
+  transition: background-color $transition-base;
 
-  &:hover {
-    background-color: #bfdbfe;
-  }
+  &:hover { background-color: $color-edit-bg-hover; }
 }
 
 .overlay {
   position: fixed;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
+  inset: 0; // במקום top/right/bottom/left בנפרד
   background-color: rgba(0, 0, 0, 0.5);
   display: flex;
   align-items: center;
@@ -38,6 +42,6 @@
   font-size: 18px;
   line-height: 24px;
   font-weight: 700;
-  color: #1f2937;
+  color: $color-text-dark;
   margin-bottom: 16px;
 }

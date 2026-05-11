@@ -1,20 +1,29 @@
+// ─── Design Tokens ───────────────────────────────────────────
+$shadow-card:       0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px -1px rgba(0, 0, 0, 0.1);
+$shadow-card-hover: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.1);
+$color-text-dark:   #1f2937;
+$color-text-muted:  #6b7280;
+$transition-base:   0.15s ease-in-out;
+
+$priorities: (
+  'low':    (#f3f4f6, #4b5563),
+  'medium': (#fef3c7, #b45309),
+  'high':   (#fee2e2, #b91c1c),
+);
+
+// ─── Styles ──────────────────────────────────────────────────
 .taskCard {
   background-color: #ffffff;
   border-radius: 8px;
   padding: 16px;
-  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px -1px rgba(0, 0, 0, 0.1);
-  transition: box-shadow 0.15s ease-in-out;
+  box-shadow: $shadow-card;
+  transition: box-shadow $transition-base;
   display: flex;
   flex-direction: column;
   height: 100%;
 
-  &:hover {
-    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.1);
-  }
-
-  &.deleted {
-    opacity: 0.5;
-  }
+  &:hover   { box-shadow: $shadow-card-hover; }
+  &.deleted { opacity: 0.5; }
 }
 
 .header {
@@ -27,14 +36,8 @@
 .title {
   font-weight: 600;
 
-  &.deleted {
-    text-decoration: line-through;
-    color: #9ca3af;
-  }
-
-  &:not(.deleted) {
-    color: #1f2937;
-  }
+  &.deleted        { text-decoration: line-through; color: #9ca3af; }
+  &:not(.deleted)  { color: $color-text-dark; }
 }
 
 .priorityBadge {
@@ -43,31 +46,23 @@
   padding: 4px 8px;
   border-radius: 9999px;
 
-  &.low {
-    background-color: #f3f4f6;
-    color: #4b5563;
-  }
-
-  &.medium {
-    background-color: #fef3c7;
-    color: #b45309;
-  }
-
-  &.high {
-    background-color: #fee2e2;
-    color: #b91c1c;
+  @each $name, $colors in $priorities {
+    &.#{$name} {
+      background-color: nth($colors, 1);
+      color:            nth($colors, 2);
+    }
   }
 }
 
 .owner {
   font-size: 12px;
   line-height: 16px;
-  color: #6b7280;
+  color: $color-text-muted;
   margin-bottom: 8px;
 }
 
 .description {
-  color: #6b7280;
+  color: $color-text-muted;
   font-size: 14px;
   line-height: 20px;
   margin-bottom: 12px;

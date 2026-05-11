@@ -1,3 +1,12 @@
+$shadow-card: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px -1px rgba(0, 0, 0, 0.1);
+$color-skeleton: #e5e7eb;
+$radius-skeleton: 4px;
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.5; }
+}
+
 .skeleton {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -6,33 +15,27 @@
   animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
 }
 
-@keyframes pulse {
-  0%, 100% {
-    opacity: 1;
-  }
-  50% {
-    opacity: 0.5;
-  }
-}
-
 .stat {
   background-color: #ffffff;
   border-radius: 8px;
   padding: 16px;
-  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px -1px rgba(0, 0, 0, 0.1);
+  box-shadow: $shadow-card;
+}
+
+%skeleton-block {
+  background-color: $color-skeleton;
+  border-radius: $radius-skeleton;
 }
 
 .labelSkeleton {
+  @extend %skeleton-block;
   height: 12px;
-  background-color: #e5e7eb;
-  border-radius: 4px;
   width: 66.666667%;
   margin-bottom: 12px;
 }
 
 .valueSkeleton {
+  @extend %skeleton-block;
   height: 32px;
-  background-color: #e5e7eb;
-  border-radius: 4px;
   width: 33.333333%;
 }

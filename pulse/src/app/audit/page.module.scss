@@ -1,3 +1,19 @@
+// ─── Design Tokens ───────────────────────────────────────────
+$color-primary:    #2563eb;
+$color-text-dark:  #1f2937;
+$color-text-mid:   #4b5563;
+$color-text-muted: #6b7280;
+$color-text-soft:  #9ca3af;
+$color-border:     #e5e7eb;
+$shadow-card:      0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px -1px rgba(0, 0, 0, 0.1);
+
+// ─── Placeholders ────────────────────────────────────────────
+%small-text {
+  font-size: 12px;
+  line-height: 16px;
+}
+
+// ─── Styles ──────────────────────────────────────────────────
 .page {
   min-height: 100vh;
   background-color: #f9fafb;
@@ -20,23 +36,21 @@
   font-size: 24px;
   line-height: 32px;
   font-weight: 700;
-  color: #1f2937;
+  color: $color-text-dark;
 }
 
 .backLink {
-  color: #2563eb;
+  color: $color-primary;
   font-size: 14px;
   line-height: 20px;
 
-  &:hover {
-    text-decoration: underline;
-  }
+  &:hover { text-decoration: underline; }
 }
 
 .tableWrapper {
   background-color: #ffffff;
   border-radius: 12px;
-  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px -1px rgba(0, 0, 0, 0.1);
+  box-shadow: $shadow-card;
   overflow: hidden;
 }
 
@@ -48,55 +62,44 @@
 
 .tableHead {
   background-color: #f9fafb;
-  border-bottom: 1px solid #e5e7eb;
+  border-bottom: 1px solid $color-border;
 }
 
 .tableHeader {
   text-align: right;
   padding: 12px 16px;
-  color: #4b5563;
+  color: $color-text-mid;
   font-weight: 500;
 }
 
 .tableBodyRow {
-  border-bottom: 1px solid #e5e7eb;
+  border-bottom: 1px solid $color-border;
 
-  &:hover {
-    background-color: #f9fafb;
-  }
+  &:hover { background-color: #f9fafb; }
 }
 
-.tableCell {
-  padding: 12px 16px;
-}
+.tableCell { padding: 12px 16px; }
 
 .actionCell {
   font-weight: 500;
-  color: #1f2937;
+  color: $color-text-dark;
 }
 
-.taskCell {
-  color: #4b5563;
-}
-
-.userCell {
-  color: #4b5563;
-}
+.taskCell,
+.userCell  { color: $color-text-mid; }
 
 .detailsCell {
-  color: #6b7280;
-  font-size: 12px;
-  line-height: 16px;
+  @extend %small-text;
+  color: $color-text-muted;
 }
 
 .timeCell {
-  color: #9ca3af;
-  font-size: 12px;
-  line-height: 16px;
+  @extend %small-text;
+  color: $color-text-soft;
 }
 
 .empty {
   text-align: center;
   padding: 64px 0;
-  color: #9ca3af;
+  color: $color-text-soft;
 }

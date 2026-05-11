@@ -1,18 +1,25 @@
+$shadow-card:    0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px -1px rgba(0, 0, 0, 0.1);
+$color-skeleton: #e5e7eb;
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.5; }
+}
+
+%skeleton-block {
+  background-color: $color-skeleton;
+}
+
+%skeleton-pill   { @extend %skeleton-block; border-radius: 9999px; height: 24px; }
+%skeleton-line   { @extend %skeleton-block; border-radius: 4px;    height: 12px; }
+%skeleton-title  { @extend %skeleton-block; border-radius: 4px;    height: 16px; }
+
 .skeleton {
   background-color: #ffffff;
   border-radius: 8px;
   padding: 16px;
-  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px -1px rgba(0, 0, 0, 0.1);
+  box-shadow: $shadow-card;
   animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
-}
-
-@keyframes pulse {
-  0%, 100% {
-    opacity: 1;
-  }
-  50% {
-    opacity: 0.5;
-  }
 }
 
 .header {
@@ -22,35 +29,10 @@
   margin-bottom: 8px;
 }
 
-.titleSkeleton {
-  height: 16px;
-  background-color: #e5e7eb;
-  border-radius: 4px;
-  width: 75%;
-}
-
-.prioritySkeleton {
-  height: 24px;
-  background-color: #e5e7eb;
-  border-radius: 9999px;
-  width: 48px;
-}
-
-.ownerSkeleton {
-  height: 12px;
-  background-color: #e5e7eb;
-  border-radius: 4px;
-  width: 100%;
-  margin-bottom: 8px;
-}
-
-.descSkeleton {
-  height: 12px;
-  background-color: #e5e7eb;
-  border-radius: 4px;
-  width: 66.666667%;
-  margin-bottom: 12px;
-}
+.titleSkeleton    { @extend %skeleton-title; width: 75%; }
+.prioritySkeleton { @extend %skeleton-pill;  width: 48px; }
+.ownerSkeleton    { @extend %skeleton-line;  width: 100%; margin-bottom: 8px; }
+.descSkeleton     { @extend %skeleton-line;  width: 66.666667%; margin-bottom: 12px; }
 
 .footer {
   display: flex;
@@ -58,16 +40,5 @@
   align-items: center;
 }
 
-.statusSkeleton {
-  height: 24px;
-  background-color: #e5e7eb;
-  border-radius: 9999px;
-  width: 64px;
-}
-
-.actionSkeleton {
-  height: 12px;
-  background-color: #e5e7eb;
-  border-radius: 4px;
-  width: 48px;
-}
+.statusSkeleton { @extend %skeleton-pill; width: 64px; }
+.actionSkeleton { @extend %skeleton-line; width: 48px; }

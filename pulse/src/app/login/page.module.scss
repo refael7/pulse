@@ -1,3 +1,7 @@
+$shadow-card:      0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px -1px rgba(0, 0, 0, 0.1);
+$color-text-dark:  #1f2937;
+$color-text-muted: #6b7280;
+
 .page {
   min-height: 100vh;
   background-color: #f9fafb;
@@ -10,7 +14,7 @@
   background-color: #ffffff;
   border-radius: 12px;
   padding: 32px;
-  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px -1px rgba(0, 0, 0, 0.1);
+  box-shadow: $shadow-card;
   text-align: center;
   max-width: 448px;
   width: 100%;
@@ -20,12 +24,12 @@
   font-size: 24px;
   line-height: 32px;
   font-weight: 700;
-  color: #1f2937;
+  color: $color-text-dark;
   margin-bottom: 8px;
 }
 
 .subtitle {
-  color: #6b7280;
+  color: $color-text-muted;
   font-size: 14px;
   line-height: 20px;
   margin-bottom: 24px;

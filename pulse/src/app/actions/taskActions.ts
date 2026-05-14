@@ -23,12 +23,12 @@ import {
 } from "@/lib/messages";
 
 const CreateTaskSchema = z.object({
-  title: z.string().min(1, titleRequiredError),
+  title: z.string().trim().min(1, titleRequiredError),
   description: z.string().optional(),
   priority: z.enum(["LOW", "MEDIUM", "HIGH"]),
 });
 
-export type FormState = {
+export interface FormState {
   success: boolean;
   message: string;
   errors?: {
@@ -39,10 +39,10 @@ export type FormState = {
 };
 
 export async function createTaskAction(
-  prevState: FormState,
   formData: FormData
 ): Promise<FormState> {
   await new Promise((r) => setTimeout(r, 500));
+
 
   const raw = {
     title: formData.get("title") as string,
@@ -63,6 +63,7 @@ export async function createTaskAction(
   const users = await getAllUsers();
   const firstUser = users[0];
 
+
   const task = await createTask({
     title: result.data.title,
     description: result.data.description,
@@ -79,7 +80,6 @@ export async function createTaskAction(
 
 export async function updateTaskAction(
   id: string,
-  prevState: FormState,
   formData: FormData
 ): Promise<FormState> {
   await new Promise((r) => setTimeout(r, 500));
@@ -120,8 +120,7 @@ export async function updateTaskStatusAction(
   id: string,
   status: "TODO" | "IN_PROGRESS" | "DONE"
 ) {
-  "use server";
-  
+
   await new Promise((r) => setTimeout(r, 500));
 
   const users = await getAllUsers();
@@ -139,10 +138,9 @@ export async function updateTaskStatusAction(
   revalidatePath("/");
 }
 export async function deleteTaskAction(id: string) {
-  "use server";
 
   const users = await getAllUsers();
-  const firstUser = users[0];
+  const firstUser = users[0]; 
 
   await softDeleteTask(id);
 
@@ -157,10 +155,9 @@ export async function deleteTaskAction(id: string) {
 }
 
 export async function restoreTaskAction(id: string) {
-  "use server";
 
-  const users = await getAllUsers();
-  const firstUser = users[0];
+ const users = await getAllUsers();
+const firstUser = users[0];
 
   await prisma.task.update({
     where: { id },

@@ -1,3 +1,5 @@
+import { Priority } from "@/generated/prisma/enums";
+
 export const appMetadataTitle = "Pulse – מערכת ניהול משימות";
 export const appMetadataDescription = "מערכת ניהול ומעקב משימות";
 export const appTitle = "Pulse 🚀";
@@ -49,7 +51,7 @@ export const minutesAgo = (minutes: number) => `לפני ${minutes} דקות`;
 export const hoursAgo = (hours: number) => `לפני ${hours} שעות`;
 export const daysAgo = (days: number) => `לפני ${days} ימים`;
 
-export const priorityLabels: Record<string, string> = {
+export const priorityLabels: Record<Priority, string> = {
   LOW: "נמוכה",
   MEDIUM: "בינונית",
   HIGH: "גבוהה",
@@ -90,3 +92,5 @@ export const restoreButtonLabel = "שחזר";
 export const pendingDots = "...";
 export const taskRestoredAction = "משימה שוחזרה";
 export const taskRestoredDetails = "שחזור לאחר מחיקה";
+export const createTaskSubtitle = "הזן את הפרטים וקבע את העדיפות כדי שהמשימה תיערך כחלק מהיומן.";
+export const notFoundSupportText = "אם הגעת דרך קישור ישן, נסה לרענן את הדף או לחזור לדף הראשי כדי להמשיך.";

@@ -4,17 +4,17 @@ import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import { wrongCredentials } from "@/lib/messages";
 
+const ONE_DAY = 60 * 60 * 24; // יום אחד בשניות
 export async function loginAction(
-  prevState: { error: string },
   formData: FormData
 ) {
-const username = (formData.get("username") as string).trim();
-const password = (formData.get("password") as string).trim();
+  const username = (formData.get("username") as string).trim();
+  const password = (formData.get("password") as string).trim();
 
   const validUsername = process.env.ADMIN_USERNAME;
   const validPassword = process.env.ADMIN_PASSWORD;
 
- 
+
   if (username !== validUsername || password !== validPassword) {
     return { error: wrongCredentials };
   }
@@ -23,7 +23,7 @@ const password = (formData.get("password") as string).trim();
   cookieStore.set("auth", "true", {
     httpOnly: true,
     secure: process.env.NODE_ENV === "production",
-    maxAge: 60 * 60 * 24, // יום אחד
+    maxAge: ONE_DAY,
     path: "/",
   });
 

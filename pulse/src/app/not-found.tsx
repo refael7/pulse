@@ -1,6 +1,6 @@
 import Link from "next/link";
 import styles from "./not-found.module.scss";
-import { backToDashboardLabel, notFoundDescription, notFoundTitle } from "@/lib/messages";
+import { backToDashboardLabel, notFoundDescription, notFoundTitle, notFoundSupportText } from "@/lib/messages";
 
 export default function NotFound() {
   return (
@@ -18,7 +18,7 @@ export default function NotFound() {
           </div>
 
           <p className={styles.supportText}>
-            אם הגעת דרך קישור ישן, נסה לרענן את הדף או לחזור לדף הראשי כדי להמשיך.
+            {notFoundSupportText}
           </p>
         </section>
       </div>

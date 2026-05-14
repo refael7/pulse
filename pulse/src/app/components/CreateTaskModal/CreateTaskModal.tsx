@@ -3,7 +3,7 @@
 import { useState } from "react";
 import styles from "./CreateTaskModal.module.scss";
 import CreateTaskForm from "../CreateTaskForm/CreateTaskForm";
-import { createNewTaskLabel, newTaskModalTitle } from "@/lib/messages";
+import { createNewTaskLabel, newTaskModalTitle, createTaskSubtitle } from "@/lib/messages";
 
 export default function CreateTaskModal() {
   const [isOpen, setIsOpen] = useState(false);
@@ -28,7 +28,7 @@ export default function CreateTaskModal() {
               <div>
                 <h2 className={styles.title}>{newTaskModalTitle}</h2>
                 <p className={styles.subtitle}>
-                  הזן את הפרטים וקבע את העדיפות כדי שהמשימה תיערך כחלק מהיומן.
+                  {createTaskSubtitle}
                 </p>
               </div>
               <button

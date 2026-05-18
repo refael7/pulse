@@ -1,11 +1,18 @@
 import { getAllTasks } from "@/lib/dal/tasks";
-import { getAuditLogs } from "@/lib/dal/audit";
+import { getAuditLogsByUser } from "@/lib/dal/audit";
+import { getCurrentUser } from "@/lib/auth";
 import styles from "./StatsBar.module.scss";
 import { openTasksLabel, doneTasksLabel, todayActionsLabel } from "@/lib/messages";
 
 export default async function StatsBar() {
-  const tasks = await getAllTasks();
-  const logs = await getAuditLogs();
+  const currentUser = await getCurrentUser();
+
+  if (!currentUser) {
+    return null;
+  }
+
+  const tasks = await getAllTasks(currentUser.id);
+  const logs = await getAuditLogsByUser(currentUser.id);
 
   const openTasks = tasks.filter((t) => t.status !== "DONE").length;
   const doneTasks = tasks.filter((t) => t.status === "DONE").length;

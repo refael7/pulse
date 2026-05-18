@@ -1,6 +1,8 @@
 export const dynamic = "force-dynamic";
 
 import Link from "next/link";
+import { redirect } from "next/navigation";
+import { getCurrentUser } from "@/lib/auth";
 import { getAllTasks, getDeletedTasks } from "@/lib/dal/tasks";
 import {
   appTitle,
@@ -18,8 +20,14 @@ import styles from "./page.module.scss";
 
 export default async function HomePage() {
   await new Promise((r) => setTimeout(r, 100));
-  const tasks = await getAllTasks();
-  const deletedTasks = await getDeletedTasks();
+  const currentUser = await getCurrentUser();
+
+  if (!currentUser) {
+    redirect("/login");
+  }
+
+  const tasks = await getAllTasks(currentUser.id);
+  const deletedTasks = await getDeletedTasks(currentUser.id);
 
   return (
     <main className={styles.page} dir="rtl">
@@ -27,7 +35,7 @@ export default async function HomePage() {
         <div className={styles.header}>
           <div>
             <h1 className={styles.title}>{appTitle}</h1>
-            <p className={styles.subtitle}>{welcomeText}</p>
+            <p className={styles.subtitle}>{`${welcomeText}, ${currentUser.name} 👋`}</p>
           </div>
           <div className={styles.actions}>
             <Link href="/audit" className={styles.auditLink}>

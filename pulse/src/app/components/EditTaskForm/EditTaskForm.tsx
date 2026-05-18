@@ -31,7 +31,7 @@ export default function EditTaskForm({
   onClose: () => void;
 }) {
   const [state, formAction, isPending] = useActionState(
-    (prevState: FormState, formData: FormData) => updateTaskAction(taskId, prevState, formData),
+    (prevState: FormState, formData: FormData) => updateTaskAction(prevState, formData, taskId),
     initialState
   );
 

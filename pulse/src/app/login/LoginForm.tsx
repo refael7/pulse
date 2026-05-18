@@ -15,7 +15,10 @@ import {
 const initialState = { error: "" };
 
 export default function LoginForm() {
-  const [state, formAction, isPending] = useActionState(loginAction, initialState);
+  const [state, formAction, isPending] = useActionState(
+    (prevState: { error: string }, formData: FormData) => loginAction(prevState, formData),
+    initialState
+  );
 
   return (
     <form action={formAction} className={styles.form}>

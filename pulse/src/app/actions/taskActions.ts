@@ -4,7 +4,7 @@ import { z } from "zod";
 import { revalidatePath } from "next/cache";
 import { createTask, updateTaskStatus, softDeleteTask, updateTask } from "@/lib/dal/tasks";
 import { logActivity } from "@/lib/dal/audit";
-import { getAllUsers } from "@/lib/dal/users";
+import { getCurrentUser } from "@/lib/auth";
 import {
   formErrorMessage,
   titleRequiredError,
@@ -20,6 +20,7 @@ import {
   taskDeletedDetails,
   taskRestoredAction,
   taskRestoredDetails,
+  notAuthenticatedError,
 } from "@/lib/messages";
 
 const CreateTaskSchema = z.object({
@@ -38,7 +39,18 @@ export interface FormState {
   };
 };
 
+async function getAuthenticatedUser() {
+  const currentUser = await getCurrentUser();
+
+  if (!currentUser) {
+    throw new Error(notAuthenticatedError);
+  }
+
+  return currentUser;
+}
+
 export async function createTaskAction(
+  _state: FormState,
   formData: FormData
 ): Promise<FormState> {
   await new Promise((r) => setTimeout(r, 500));
@@ -60,18 +72,16 @@ export async function createTaskAction(
     };
   }
 
-  const users = await getAllUsers();
-  const firstUser = users[0];
-
+  const currentUser = await getAuthenticatedUser();
 
   const task = await createTask({
     title: result.data.title,
     description: result.data.description,
     priority: result.data.priority as "LOW" | "MEDIUM" | "HIGH",
-    ownerId: firstUser.id,
+    ownerId: currentUser.id,
   });
 
-  await logActivity(firstUser.id, task.id, taskCreatedAction, `${taskCreatedDetailsPrefix}${task.title}`);
+  await logActivity(currentUser.id, task.id, taskCreatedAction, `${taskCreatedDetailsPrefix}${task.title}`);
 
   revalidatePath("/");
 
@@ -79,8 +89,9 @@ export async function createTaskAction(
 }
 
 export async function updateTaskAction(
-  id: string,
-  formData: FormData
+  _state: FormState,
+  formData: FormData,
+  id: string
 ): Promise<FormState> {
   await new Promise((r) => setTimeout(r, 500));
 
@@ -100,8 +111,7 @@ export async function updateTaskAction(
     };
   }
 
-  const users = await getAllUsers();
-  const firstUser = users[0];
+  const currentUser = await getAuthenticatedUser();
 
   await updateTask(id, {
     title: result.data.title,
@@ -109,7 +119,7 @@ export async function updateTaskAction(
     priority: result.data.priority as "LOW" | "MEDIUM" | "HIGH",
   });
 
-  await logActivity(firstUser.id, id, taskUpdatedAction, `${taskUpdatedDetailsPrefix}${result.data.title}`);
+  await logActivity(currentUser.id, id, taskUpdatedAction, `${taskUpdatedDetailsPrefix}${result.data.title}`);
 
   revalidatePath("/");
 
@@ -123,13 +133,12 @@ export async function updateTaskStatusAction(
 
   await new Promise((r) => setTimeout(r, 500));
 
-  const users = await getAllUsers();
-  const firstUser = users[0];
+  const currentUser = await getAuthenticatedUser();
 
   await updateTaskStatus(id, status);
 
   await logActivity(
-    firstUser.id,
+    currentUser.id,
     id,
     statusChangedAction,
     `${statusChangedDetailsPrefix}${status}`
@@ -138,14 +147,12 @@ export async function updateTaskStatusAction(
   revalidatePath("/");
 }
 export async function deleteTaskAction(id: string) {
-
-  const users = await getAllUsers();
-  const firstUser = users[0]; 
+  const currentUser = await getAuthenticatedUser();
 
   await softDeleteTask(id);
 
   await logActivity(
-    firstUser.id,
+    currentUser.id,
     id,
     taskDeletedAction,
     taskDeletedDetails
@@ -155,9 +162,7 @@ export async function deleteTaskAction(id: string) {
 }
 
 export async function restoreTaskAction(id: string) {
-
- const users = await getAllUsers();
-const firstUser = users[0];
+  const currentUser = await getAuthenticatedUser();
 
   await prisma.task.update({
     where: { id },
@@ -165,7 +170,7 @@ const firstUser = users[0];
   });
 
   await logActivity(
-    firstUser.id,
+    currentUser.id,
     id,
     taskRestoredAction,
     taskRestoredDetails

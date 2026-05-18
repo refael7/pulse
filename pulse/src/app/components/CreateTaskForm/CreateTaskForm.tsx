@@ -18,7 +18,10 @@ import {
 const initialState: FormState = { success: false, message: "" };
 
 export default function CreateTaskForm({ onClose }: { onClose: () => void }) {
-  const [state, formAction, isPending] = useActionState(createTaskAction, initialState);
+  const [state, formAction, isPending] = useActionState(
+    (prevState: FormState, formData: FormData) => createTaskAction(prevState, formData),
+    initialState
+  );
 
   useEffect(() => {
   if (state.success) onClose();

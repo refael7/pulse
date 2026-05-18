@@ -8,16 +8,19 @@ export interface CreateTaskInput {
   ownerId: string;
 };
 
-export async function getAllTasks() {
+export async function getAllTasks(ownerId?: string) {
   return prisma.task.findMany({
-    where: { isDeleted: false },
+    where: {
+      isDeleted: false,
+      ...(ownerId ? { ownerId } : {}),
+    },
     include: { owner: true },
     orderBy: { createdAt: "desc" },
   });
 }
 
 export async function getTaskById(id: string) {
-  return prisma.task.findUnique({
+  return prisma.task.findFirst({
     where: { id, isDeleted: false },
     include: { owner: true },
   });
@@ -61,9 +64,12 @@ export async function updateTask(id: string, data: UpdateTaskInput) {
   });
 }
 
-export async function getDeletedTasks() {
+export async function getDeletedTasks(ownerId?: string) {
   return prisma.task.findMany({
-    where: { isDeleted: true },
+    where: {
+      isDeleted: true,
+      ...(ownerId ? { ownerId } : {}),
+    },
     include: { owner: true },
     orderBy: { createdAt: "desc" },
   });

@@ -3,7 +3,7 @@ import { Priority } from "@/generated/prisma/enums";
 export const appMetadataTitle = "Pulse – מערכת ניהול משימות";
 export const appMetadataDescription = "מערכת ניהול ומעקב משימות";
 export const appTitle = "Pulse 🚀";
-export const welcomeText = "ברוכים הבאים, refael 👋";
+export const welcomeText = "ברוכים הבאים";
 export const auditLogLabel = "יומן פעולות 📋";
 export const noTasksTitle = "אין משימות עדיין";
 export const noTasksSubtitle = "התחילו ביצירת המשימה הראשונה";
@@ -76,6 +76,7 @@ export const nextStatus = {
 } as const;
 
 export const formErrorMessage = "יש שגיאות בטופס";
+export const notAuthenticatedError = "משתמש לא מאושר";
 export const titleRequiredError = "כותרת היא שדה חובה";
 export const taskCreatedAction = "משימה נוצרה";
 export const taskCreatedDetailsPrefix = "כותרת: ";

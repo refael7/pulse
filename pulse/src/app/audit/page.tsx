@@ -1,7 +1,9 @@
 export const dynamic = "force-dynamic";
 
 import Link from "next/link";
-import { getAuditLogs } from "@/lib/dal/audit";
+import { redirect } from "next/navigation";
+import { getCurrentUser } from "@/lib/auth";
+import { getAuditLogsByUser } from "@/lib/dal/audit";
 import styles from "./page.module.scss";
 import {
   auditLogLabel,
@@ -32,7 +34,13 @@ function timeAgo(date: Date): string {
 }
 
 export default async function AuditPage() {
-  const logs = await getAuditLogs();
+  const currentUser = await getCurrentUser();
+
+  if (!currentUser) {
+    redirect("/login");
+  }
+
+  const logs = await getAuditLogsByUser(currentUser.id);
 
   return (
     <main className={styles.page} dir="rtl">

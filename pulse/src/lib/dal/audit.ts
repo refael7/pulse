@@ -29,7 +29,7 @@ export async function getAuditLogs() {
 export async function getAuditLogsByUser(userId: string) {
   return prisma.auditLog.findMany({
     where: { userId },
-    include: { task: true },
+    include: { task: true, user: true },
     orderBy: { createdAt: "desc" },
   });
 }
